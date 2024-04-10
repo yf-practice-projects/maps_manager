@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  name      String
+  type      Int
+  content   String
+  createdAt DateTime @default(now())
+}
+
+model Picture {
+  id      Int         @id @default(autoincrement())
+  name    String      @unique
+  storeId Int
+  typeId  Int         @default(1)
+  Store   Store       @relation(fields: [storeId], references: [id])
+  Type    PictureType @relation(fields: [typeId], references: [id])
+}
+
+model PictureType {
+  id       Int       @id @default(autoincrement())
+  type     String    @unique
+  fgDelete Boolean   @default(false)
+  Picture  Picture[]
+}
+
+model Store {
+  id        Int       @id @default(autoincrement())
+  name      String  @unique
+  area      String  @default("")
+  type      String
+  x         Int
+  y         Int
+  address   String?
+  holiday   String?
+  opening   String?
+  googleMap String?
+  Picture   Picture[]
+}
