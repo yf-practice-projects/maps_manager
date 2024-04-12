@@ -19,8 +19,11 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={inter.className}>
-        <Sidebar />
-        <Chakra>{children}</Chakra>
+        <div className="flex flex-row h-[100vh]">
+          <Sidebar />
+          {children}
+        </div>
+        
       </body>
     </html>
   );

@@ -29,13 +29,6 @@ export async function GET(request: NextRequest) {
 	return NextResponse.json({data:pictures},{status:200});
 }
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
-
 export async function POST(request: NextRequest) {
 	
 	const formData = await request.formData()
